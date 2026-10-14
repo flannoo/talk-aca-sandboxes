@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<order>
+  <id>SO-2026-00841</id>
+  <customer>Contoso Logistics BV</customer>
+  <lines>
+    <line><sku>PAL-EUR-120x80</sku><qty>24</qty></line>
+    <line><sku>WRAP-STRETCH-500</sku><qty>6</qty></line>
+    <line><sku>LABEL-THERMAL-A6</sku><qty>1000</qty></line>
+  </lines>
+</order>

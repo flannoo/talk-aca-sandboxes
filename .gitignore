@@ -1,0 +1,14 @@
+bin/
+obj/
+*.user
+.vs/
+# local overrides (LLM endpoint, ACR name, etc.) — never commit
+demos/shared/env.local.ps1
+# demo run output
+demos/**/out/
+
+# Marp exports
+out/
+
+# Claude Code preview config (machine-specific paths)
+.claude/launch.json
